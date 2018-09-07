@@ -1,0 +1,199 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ejercicio1</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-09-07"><meta name="DC.source" content="ejercicio1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">imagen=zeros(512,512,3,<span class="string">'uint8'</span>); <span class="comment">%imagen de 512x512 fondo negro</span>
+</pre><pre class="codeinput">imagen(1:128,257:385,1)=255;   <span class="comment">%%rojo parte en la fila(1,128) y llega a la columa(257,385)</span>
+imagen(1:128,386:511,2)=255;   <span class="comment">%%verde</span>
+imagen(128:256,257:385,3)=255; <span class="comment">%%azul</span>
+imagen(192:256,386:511,:)=255; <span class="comment">%%blanco</span>
+
+imagen(386:512,129:256,1)=255; <span class="comment">%lo mismo de arriba pero invertido</span>
+imagen(386:512,1:128,2)=255;
+imagen(257:385,129:256,3)=255;
+imagen(321:385,1:128,:)=255;
+</pre><pre class="codeinput"><span class="comment">%aca hice los bucles desde 1 a 256, para que los colores pudiesen partir</span>
+<span class="comment">%desde el uno hasta aumentar la intensidad al 256, por ejemplo,</span>
+<span class="comment">%para el primer caso parte por 1=negro y al ir aumentado los valores,</span>
+<span class="comment">%va cambiando a las diferentes tonalidades de rojo, al combinar los 3</span>
+<span class="comment">%bucles nos queda la imagen dada, el rojo fue degradado de izquierda(negro)</span>
+<span class="comment">%a derecha(rojo),el verde de derecha(verde) a izquierda(negro),</span>
+<span class="comment">%y el azul fue degradado de abajo(azul) hacia arriba(negro)</span>
+
+<span class="keyword">for</span> ancho=1:256;
+    <span class="keyword">for</span> alto=1:256;
+
+        imagen(ancho,alto,1)=uint8(alto);
+       <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">for</span> ancho=1:256;
+    <span class="keyword">for</span> alto=1:256;
+
+        imagen(ancho,alto,2)=uint8(256-alto);
+       <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">for</span> ancho=1:256;
+    <span class="keyword">for</span> alto=1:256;
+        imagen(ancho,alto,3)=uint8(256-ancho);<span class="comment">%</span>
+       <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">for</span> ancho=257:512;
+    <span class="keyword">for</span> alto=257:512;
+
+        imagen(ancho,alto,1)=uint8(512-alto); <span class="comment">%limite por la derecha era 512 por lo tanto lo reste al alto para que se degradara de izquierda a derecha</span>
+       <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> ancho=257:512;
+    <span class="keyword">for</span> alto=257:512;
+
+        imagen(ancho,alto,2)=uint8(alto-256); <span class="comment">%habia que ir aumentando en 1, hasta llegar a 256</span>
+       <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> ancho=257:512;
+    <span class="keyword">for</span> alto=257:512;
+
+        imagen(ancho,alto,3)=uint8(ancho-256); <span class="comment">%lo mismo que arriba</span>
+       <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+
+
+figure,
+imagesc(imagen);
+</pre><img vspace="5" hspace="5" src="ejercicio1_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%%
+imagen=zeros(512,512,3,'uint8'); %imagen de 512x512 fondo negro
+%%
+imagen(1:128,257:385,1)=255;   %%rojo parte en la fila(1,128) y llega a la columa(257,385)
+imagen(1:128,386:511,2)=255;   %%verde
+imagen(128:256,257:385,3)=255; %%azul
+imagen(192:256,386:511,:)=255; %%blanco
+
+imagen(386:512,129:256,1)=255; %lo mismo de arriba pero invertido
+imagen(386:512,1:128,2)=255;
+imagen(257:385,129:256,3)=255;
+imagen(321:385,1:128,:)=255;
+%%
+
+%aca hice los bucles desde 1 a 256, para que los colores pudiesen partir
+%desde el uno hasta aumentar la intensidad al 256, por ejemplo,
+%para el primer caso parte por 1=negro y al ir aumentado los valores,
+%va cambiando a las diferentes tonalidades de rojo, al combinar los 3
+%bucles nos queda la imagen dada, el rojo fue degradado de izquierda(negro)
+%a derecha(rojo),el verde de derecha(verde) a izquierda(negro),
+%y el azul fue degradado de abajo(azul) hacia arriba(negro)
+
+for ancho=1:256;  
+    for alto=1:256; 
+        
+        imagen(ancho,alto,1)=uint8(alto);
+       end
+end
+for ancho=1:256;  
+    for alto=1:256; 
+        
+        imagen(ancho,alto,2)=uint8(256-alto);
+       end
+end
+for ancho=1:256;  
+    for alto=1:256; 
+        imagen(ancho,alto,3)=uint8(256-ancho);%
+       end
+end
+
+
+%%
+for ancho=257:512;  
+    for alto=257:512; 
+        
+        imagen(ancho,alto,1)=uint8(512-alto); %limite por la derecha era 512 por lo tanto lo reste al alto para que se degradara de izquierda a derecha
+       end
+end
+
+for ancho=257:512;  
+    for alto=257:512; 
+        
+        imagen(ancho,alto,2)=uint8(alto-256); %habia que ir aumentando en 1, hasta llegar a 256
+       end
+end
+
+for ancho=257:512;  
+    for alto=257:512; 
+        
+        imagen(ancho,alto,3)=uint8(ancho-256); %lo mismo que arriba
+       end
+end
+
+
+
+figure,
+imagesc(imagen);
+##### SOURCE END #####
+--></body></html>
